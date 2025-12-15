@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+    <title>Notification ARO Assurance</title>
+    
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:AllowPNG/>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+
+    <style>
+        /* ============================================
+           FONTS - Fallback pour Gmail
+           ============================================ */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        /* ============================================
+           RESET UNIVERSEL
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, table, td, a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table {
+            border-collapse: collapse !important;
+        }
+
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* ============================================
+           VARIABLES CSS (Apple Mail)
+           Gmail ignore les CSS variables
+           ============================================ */
+        :root {
+            --color-primary: #0F5132;
+            --color-primary-light: #1A7A4A;
+            --color-text-primary: #1D1D1F;
+            --color-text-secondary: #6E6E73;
+            --color-bg-light: #F5F5F7;
+        }
+
+        /* ============================================
+           ANIMATIONS (Apple Mail uniquement)
+           Gmail ignore @keyframes
+           ============================================ */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        @keyframes glassReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes statusPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(15, 81, 50, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(15, 81, 50, 0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            25% { transform: translateY(-8px) scale(1.1); }
+            50% { transform: translateY(0) scale(1); }
+            75% { transform: translateY(-4px) scale(1.05); }
+        }
+
+        /* ============================================
+           BODY (Fond animé pour Apple Mail)
+           ============================================ */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1D1D1F;
+            background: linear-gradient(135deg, #0F5132 0%, #1A7A4A 50%, #0F5132 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+            padding: 40px 20px;
+            margin: 0;
+            width: 100% !important;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Gmail fallback : fond statique */
+        u + .body {
+            background: #0F5132 !important;
+            animation: none !important;
+        }
+
+        /* ============================================
+           WRAPPER & CONTAINER
+           ============================================ */
+        .email-wrapper {
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .email-container {
+            max-width: 640px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            /* Apple Mail : animation + glass effect */
+            animation: glassReveal 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+        }
+
+        /* Gmail fallback : pas de backdrop-filter */
+        u + .email-container {
+            background: #FFFFFF !important;
+            backdrop-filter: none !important;
+            animation: none !important;
+        }
+
+        /* ============================================
+           HEADER (Apple Mail : effets + animations)
+           ============================================ */
+        .header {
+            background: linear-gradient(135deg, #0F5132 0%, #1A7A4A 100%);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Apple Mail : pseudo-éléments animés */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        /* Gmail fallback : pas de pseudo-éléments animés */
+        u + .header::before,
+        u + .header::after {
+            display: none !important;
+        }
+
+        .header-icon {
+            font-size: 72px;
+            margin-bottom: 20px;
+            display: inline-block;
+            /* Apple Mail : animation */
+            animation: iconBounce 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Gmail fallback : pas d'animation */
+        u + .header-icon {
+            animation: none !important;
+        }
+
+        .header-title {
+            position: relative;
+            z-index: 1;
+            font-size: 42px;
+            font-weight: 800;
+            color: #FFFFFF;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+            letter-spacing: 1px;
+            margin: 0 0 12px 0;
+        }
+
+        .header-subtitle {
+            position: relative;
+            z-index: 1;
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============================================
+           HERO (Status Icon)
+           ============================================ */
+        .hero {
+            padding: 60px 40px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+            /* Apple Mail : animation */
+            animation: fadeInScale 0.6s ease-out 0.3s both;
+        }
+
+        u + .hero {
+            background: #FFFFFF !important;
+            animation: none !important;
+        }
+
+        .status-icon-wrapper {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .status-icon {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            /* Apple Mail : animation */
+            animation: statusPulse 3s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+            background: linear-gradient(135deg, #0F5132 0%, #1A7A4A 100%);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        u + .status-icon {
+            animation: none !important;
+        }
+
+        /* Status colors */
+        .status-validee {
+            background: linear-gradient(135deg, #34C759 0%, #30D158 100%) !important;
+        }
+
+        .status-refusee {
+            background: linear-gradient(135deg, #FF3B30 0%, #FF453A 100%) !important;
+        }
+
+        .status-en_traitement {
+            background: linear-gradient(135deg, #007AFF 0%, #0A84FF 100%) !important;
+        }
+
+        .status-complements_requis {
+            background: linear-gradient(135deg, #FF9500 0%, #FF9F0A 100%) !important;
+        }
+
+        .status-en_attente {
+            background: linear-gradient(135deg, #5856D6 0%, #5E5CE6 100%) !important;
+        }
+
+        /* Gmail fallback : couleurs solides */
+        u + .status-validee { background: #34C759 !important; }
+        u + .status-refusee { background: #FF3B30 !important; }
+        u + .status-en_traitement { background: #007AFF !important; }
+        u + .status-complements_requis { background: #FF9500 !important; }
+        u + .status-en_attente { background: #5856D6 !important; }
+
+        .hero-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1D1D1F;
+            margin: 0 0 16px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-subtitle {
+            font-size: 19px;
+            color: #6E6E73;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* ============================================
+           CONTENT
+           ============================================ */
+        .content {
+            padding: 40px 40px 50px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(245, 245, 247, 0.85) 100%);
+        }
+
+        u + .content {
+            background: #F5F5F7 !important;
+        }
+
+        /* ============================================
+           INFO CARD (Compatible Gmail)
+           ============================================ */
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(15, 81, 50, 0.1);
+            border-radius: 20px;
+            padding: 0;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            /* Apple Mail : animation */
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        u + .info-card {
+            background: #FFFFFF !important;
+            animation: none !important;
+        }
+
+        .info-row {
+            padding: 24px 28px;
+            border-bottom: 1px solid rgba(15, 81, 50, 0.06);
+            /* Apple Mail : animation */
+            animation: fadeInScale 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        u + .info-row {
+            animation: none !important;
+            opacity: 1 !important;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-row:nth-child(1) { animation-delay: 0.1s; }
+        .info-row:nth-child(2) { animation-delay: 0.2s; }
+        .info-row:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Gmail fallback : pas de delay */
+        u + .info-row:nth-child(1),
+        u + .info-row:nth-child(2),
+        u + .info-row:nth-child(3) {
+            animation-delay: 0s !important;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #6E6E73;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            font-weight: 700;
+            color: #1D1D1F;
+            font-size: 16px;
+            word-wrap: break-word;
+        }
+
+        /* ============================================
+           TIMELINE (Compatible Gmail)
+           ============================================ */
+        .timeline {
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 60px;
+            bottom: 60px;
+            width: 3px;
+            background: linear-gradient(180deg, #0F5132 0%, #1A7A4A 100%);
+            border-radius: 10px;
+        }
+
+        u + .timeline::before {
+            background: #0F5132 !important;
+        }
+
+        .timeline-item {
+            display: table;
+            width: 100%;
+            margin-bottom: 32px;
+            /* Apple Mail : animation */
+            animation: slideInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        u + .timeline-item {
+            animation: none !important;
+            opacity: 1 !important;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+
+        .timeline-dot-wrapper {
+            display: table-cell;
+            width: 40px;
+            vertical-align: top;
+            padding-top: 8px;
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timeline-dot.old {
+            background: linear-gradient(135deg, #E8E8ED 0%, #D1D1D6 100%);
+            border: 3px solid #F5F5F7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .timeline-dot.new {
+            background: linear-gradient(135deg, #0F5132 0%, #1A7A4A 100%);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 30px rgba(15, 81, 50, 0.4), 0 8px 24px rgba(0, 0, 0, 0.08);
+            /* Apple Mail : animation */
+            animation: statusPulse 3s ease infinite;
+        }
+
+        u + .timeline-dot.new {
+            animation: none !important;
+        }
+
+        u + .timeline-dot.old {
+            background: #E8E8ED !important;
+        }
+
+        u + .timeline-dot.new {
+            background: #0F5132 !important;
+        }
+
+        .timeline-dot::after {
+            content: '✓';
+            font-size: 18px;
+            font-weight: 900;
+            color: white;
+        }
+
+        .timeline-dot.old::after {
+            color: #98989D;
+        }
+
+        .timeline-content {
+            display: table-cell;
+            padding-left: 24px;
+            padding-top: 4px;
+            vertical-align: top;
+        }
+
+        .timeline-label {
+            font-size: 13px;
+            color: #98989D;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .timeline-status {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1D1D1F;
+            letter-spacing: -0.3px;
+        }
+
+        /* ============================================
+           COMMENT BOX
+           ============================================ */
+        .comment-box {
+            background: rgba(255, 249, 219, 0.9);
+            border-left: 5px solid #0F5132;
+            border-radius: 20px;
+            padding: 28px;
+            margin: 32px 0;
+            /* Apple Mail : animation */
+            animation: slideInUp 0.6s ease 0.6s both;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        u + .comment-box {
+            background: #FFF9DB !important;
+            animation: none !important;
+        }
+
+        .comment-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0F5132;
+            margin-bottom: 14px;
+        }
+
+        .comment-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .comment-text {
+            font-size: 15px;
+            color: #1D1D1F;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, rgba(15, 81, 50, 0.2), transparent);
+            margin: 40px 0;
+        }
+
+        u + .divider {
+            background: rgba(15, 81, 50, 0.2) !important;
+        }
+
+        /* ============================================
+           CTA BUTTON (Compatible Gmail)
+           ============================================ */
+        .cta-wrapper {
+            text-align: center;
+            padding: 32px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #0F5132 0%, #1A7A4A 100%);
+            color: #FFFFFF !important;
+            text-decoration: none;
+            padding: 20px 50px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 10px 30px rgba(15, 81, 50, 0.25);
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        u + .cta-button {
+            background: #0F5132 !important;
+        }
+
+        /* Apple Mail : effet hover shimmer */
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        u + .cta-button::before {
+            display: none !important;
+        }
+
+        /* ============================================
+           INFO BOXES
+           ============================================ */
+        .warning-box,
+        .success-box,
+        .danger-box {
+            border-radius: 20px;
+            padding: 28px;
+            margin: 32px 0;
+            /* Apple Mail : animation */
+            animation: slideInUp 0.6s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        u + .warning-box,
+        u + .success-box,
+        u + .danger-box {
+            animation: none !important;
+        }
+
+        .warning-box {
+            background: rgba(255, 204, 0, 0.15);
+            border-left: 5px solid #FF9500;
+        }
+
+        .success-box {
+            background: rgba(52, 199, 89, 0.15);
+            border-left: 5px solid #34C759;
+        }
+
+        .danger-box {
+            background: rgba(255, 59, 48, 0.15);
+            border-left: 5px solid #FF3B30;
+        }
+
+        u + .warning-box { background: #FFF4CC !important; }
+        u + .success-box { background: #E8F5E9 !important; }
+        u + .danger-box { background: #FFEBEE !important; }
+
+        .warning-box strong,
+        .success-box strong,
+        .danger-box strong {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: linear-gradient(180deg, rgba(245, 245, 247, 0.9) 0%, rgba(232, 232, 237, 0.9) 100%);
+            padding: 40px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(15, 81, 50, 0.1);
+        }
+
+        u + .footer {
+            background: #F5F5F7 !important;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #6E6E73;
+            margin: 0 0 20px 0;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            margin: 20px 0;
+        }
+
+        .footer-link {
+            color: #0F5132;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0 12px;
+            padding: 8px 16px;
+            border-radius: 12px;
+        }
+
+        /* ============================================
+           RESPONSIVE (Mobile)
+           ============================================ */
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 20px 10px !important;
+            }
+
+            .email-container {
+                border-radius: 28px !important;
+            }
+
+            .header {
+                padding: 48px 24px !important;
+            }
+
+            .header-icon {
+                font-size: 56px !important;
+            }
+
+            .header-title {
+                font-size: 32px !important;
+            }
+
+            .header-subtitle {
+                font-size: 15px !important;
+            }
+
+            .hero {
+                padding: 48px 24px !important;
+            }
+
+            .status-icon {
+                width: 110px !important;
+                height: 110px !important;
+                font-size: 56px !important;
+            }
+
+            .hero-title {
+                font-size: 28px !important;
+            }
+
+            .hero-subtitle {
+                font-size: 17px !important;
+            }
+
+            .content {
+                padding: 32px 24px 40px !important;
+            }
+
+            .info-card {
+                margin-bottom: 24px !important;
+            }
+
+            .info-row {
+                padding: 20px !important;
+            }
+
+            .info-value {
+                font-size: 17px !important;
+            }
+
+            .timeline {
+                padding: 32px 0 !important;
+            }
+
+            .timeline::before {
+                left: 10px !important;
+            }
+
+            .timeline-dot-wrapper {
+                width: 32px !important;
+            }
+
+            .timeline-dot {
+                width: 32px !important;
+                height: 32px !important;
+            }
+
+            .timeline-dot::after {
+                font-size: 14px !important;
+            }
+
+            .timeline-content {
+                padding-left: 16px !important;
+            }
+
+            .timeline-status {
+                font-size: 18px !important;
+            }
+
+            .comment-box {
+                padding: 20px !important;
+            }
+
+            .cta-button {
+                width: 100% !important;
+                padding: 18px 40px !important;
+                font-size: 17px !important;
+            }
+
+            .footer {
+                padding: 32px 24px !important;
+            }
+
+            .footer-link {
+                display: block !important;
+                margin: 8px 0 !important;
+            }
+        }
+
+        /* ============================================
+           DARK MODE
+           ============================================ */
+        @media (prefers-color-scheme: dark) {
+            .email-container {
+                background: rgba(28, 28, 30, 0.95) !important;
+            }
+
+            .hero,
+            .content {
+                background: rgba(28, 28, 30, 0.95) !important;
+            }
+
+            .info-card {
+                background: rgba(44, 44, 46, 0.8) !important;
+            }
+
+            .hero-title,
+            .timeline-status,
+            .info-value {
+                color: #F5F5F7 !important;
+            }
+
+            .hero-subtitle,
+            .timeline-label,
+            .info-label {
+                color: #98989D !important;
+            }
+
+            .footer {
+                background: rgba(44, 44, 46, 0.95) !important;
+            }
+
+            .footer-text {
+                color: #98989D !important;
+            }
+        }
+
+        /* ============================================
+           PRINT
+           ============================================ */
+        @media print {
+            body {
+                background: #FFFFFF !important;
+                padding: 0 !important;
+            }
+
+            .email-container {
+                box-shadow: none !important;
+                animation: none !important;
+                backdrop-filter: none !important;
+            }
+
+            * {
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="body">
+    <div class="email-wrapper">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0; padding: 0;">
+            <tr>
+                <td align="center" style="padding: 0;">
+                    <div class="email-container">
+
+                        <!-- HEADER -->
+                        <div class="header">
+                            <div class="header-icon">🏥</div>
+                            <h1 class="header-title">ARO ASSURANCE</h1>
+                            <p class="header-subtitle">Fiantohana Aro · Madagascar</p>
+                        </div>
+
+                        <!-- HERO -->
+                        <div class="hero">
+                            <div class="status-icon-wrapper">
+                                <div class="status-icon status-{{STATUT_CLASS}}">
+                                    {{STATUT_ICON}}
+                                </div>
+                            </div>
+                            <h1 class="hero-title">{{TITRE}}</h1>
+                            <p class="hero-subtitle">📋 Déclaration N° {{NUMERO_DECLARATION}}</p>
+                        </div>
+
+                        <!-- CONTENT -->
+                        <div class="content">
+
+                            <!-- INFO CARD -->
+                            <div class="info-card">
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                    <tr>
+                                        <td class="info-row">
+                                            <div class="info-label">👤 Assuré</div>
+                                            <div class="info-value">{{ASSURE_NOM}}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="info-row">
+                                            <div class="info-label">🩺 Type de sinistre</div>
+                                            <div class="info-value">{{TYPE_SINISTRE}}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="info-row">
+                                            <div class="info-label">📅 Date de traitement</div>
+                                            <div class="info-value">{{DATE_TRAITEMENT}}</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- TIMELINE -->
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot-wrapper">
+                                        <div class="timeline-dot old"></div>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-label">📊 Statut précédent</div>
+                                        <div class="timeline-status">{{ANCIEN_STATUT_LABEL}}</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot-wrapper">
+                                        <div class="timeline-dot new"></div>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-label">🔔 Nouveau statut</div>
+                                        <div class="timeline-status">{{NOUVEAU_STATUT_LABEL}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- COMMENTAIRE ADMIN (optionnel) -->
+                            {{COMMENTAIRE_SECTION}}
+
+                            <!-- DIVIDER -->
+                            <div class="divider"></div>
+
+                            <!-- CTA -->
+                            <div class="cta-wrapper">
+                                <a href="{{PORTAL_URL}}" class="cta-button" style="color: #FFFFFF;">
+                                    🚀 Voir ma déclaration
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- FOOTER -->
+                        <div class="footer">
+                            <p class="footer-text">
+                                <strong>ARO Assurance Madagascar - Fiantohana Aro</strong><br>
+                                Cet email a été généré automatiquement.<br>
+                                Pour toute question, merci de contacter notre service client.
+                            </p>
+
+                            <div class="footer-links">
+                                <a href="tel:+261340000000" class="footer-link">📞 +261 34 00 000 00</a>
+                                <a href="mailto:contact@aro-assurance.mg" class="footer-link">📧 Contact</a>
+                                <a href="https://aro-assurance.mg" class="footer-link">🌐 Site web</a>
+                            </div>
+
+                            <p class="footer-text" style="margin-top: 24px; font-size: 13px; color: #0F5132; font-weight: 600;">
+                                © 2025 ARO Assurance Madagascar · Tous droits réservés
+                            </p>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

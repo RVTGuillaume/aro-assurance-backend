@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no,address=no,email=no">
+    <title>Notification Assurance ARO</title>
+
+    <style>
+        /* ============================================
+           RESET GMAIL-SAFE
+           ============================================ */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table {
+            border-collapse: collapse !important;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        /* ============================================
+           TYPOGRAPHIE
+           ============================================ */
+        body,
+        td,
+        th,
+        p,
+        a {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ============================================
+           WRAPPER PRINCIPAL - FOND BLANC
+           ============================================ */
+        .body-wrapper {
+            background-color: #FFFFFF; /* Changé : Blanc au lieu de vert */
+            padding: 0;
+            margin: 0;
+        }
+
+        .email-outer-table {
+            width: 100%;
+            background-color: #FFFFFF; /* Changé : Blanc */
+            padding: 40px 0;
+        }
+
+        .email-container {
+            max-width: 640px;
+            background-color: #FFFFFF;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           HEADER (Vert avec logo et titre)
+           ============================================ */
+        .header-table {
+            width: 100%;
+            background-color: #0F5132;
+            padding: 50px 30px;
+            border-radius: 32px 32px 0 0; /* Arrondi seulement en haut */
+        }
+
+        .header-logo-cell {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .header-logo {
+            font-size: 64px;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .header-title {
+            font-size: 38px;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0 0 10px 0;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #FFFFFF;
+            opacity: 0.9;
+            margin: 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* ============================================
+           SECTION STATUT (Hero avec icône)
+           ============================================ */
+        .hero-section {
+            width: 100%;
+            background-color: #FFFFFF;
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .status-badge-table {
+            margin: 0 auto 30px;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .status-badge {
+            width: 140px;
+            height: 140px;
+            border-radius: 70px;
+            text-align: center;
+            vertical-align: middle;
+            border: 6px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+        }
+
+        .status-icon {
+            font-size: 68px;
+            line-height: 128px;
+            display: block;
+        }
+
+        /* Classes de couleur pour statuts */
+        .status-validee {
+            background-color: #34C759;
+        }
+
+        .status-refusee {
+            background-color: #FF3B30;
+        }
+
+        .status-en_traitement {
+            background-color: #007AFF;
+        }
+
+        .status-complements_requis {
+            background-color: #FF9500;
+        }
+
+        .status-en_attente {
+            background-color: #5856D6;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1D1D1F;
+            margin: 0 0 15px 0;
+            padding: 0;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #6E6E73;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* ============================================
+           SECTION CONTENU (Infos + Timeline)
+           ============================================ */
+        .content-section {
+            width: 100%;
+            background-color: #F8F8F8; /* Gris très léger */
+            padding: 40px 30px;
+        }
+
+        /* ============================================
+           CARTE INFORMATIONS - BORDURES ULTRA-VISIBLES
+           ============================================ */
+        .info-card-table {
+            width: 100%;
+            background-color: #FFFFFF;
+            border-radius: 32px; /* Ultra-arrondi */
+            margin-bottom: 30px;
+            border: 3px solid #E0E0E0; /* Bordure visible */
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12); /* Ombre forte */
+        }
+
+        .info-row {
+            border-bottom: 2px solid #F0F0F0; /* Bordure visible */
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-cell {
+            padding: 24px 28px;
+            vertical-align: top;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #6E6E73;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-icon {
+            font-size: 16px;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        .info-value {
+            font-size: 17px;
+            color: #1D1D1F;
+            font-weight: 700;
+            margin: 0;
+            word-wrap: break-word;
+            text-transform: capitalize; /* Première lettre majuscule */
+        }
+
+        /* ============================================
+           TIMELINE (Structure simplifiée)
+           ============================================ */
+        .timeline-table {
+            width: 100%;
+            margin: 30px 0;
+        }
+
+        .timeline-row {
+            vertical-align: top;
+        }
+
+        .timeline-dot-cell {
+            width: 50px;
+            padding: 5px 0;
+            text-align: center;
+        }
+
+        .timeline-dot {
+            width: 42px;
+            height: 42px;
+            border-radius: 21px; /* Ultra-arrondi */
+            display: inline-block;
+            text-align: center;
+            line-height: 34px;
+            font-size: 16px;
+            font-weight: 900;
+            margin: 0 auto;
+        }
+
+        .timeline-dot-old {
+            background-color: #E8E8ED;
+            border: 4px solid #F5F5F7;
+            color: #98989D;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .timeline-dot-new {
+            background-color: #0F5132;
+            border: 4px solid rgba(15, 81, 50, 0.3);
+            color: #FFFFFF;
+            box-shadow: 0 0 20px rgba(15, 81, 50, 0.5), 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-content-cell {
+            padding: 5px 0 25px 15px;
+        }
+
+        .timeline-label {
+            font-size: 12px;
+            color: #98989D;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+        }
+
+        .timeline-status {
+            font-size: 19px;
+            font-weight: 700;
+            color: #1D1D1F;
+            margin: 0;
+            text-transform: capitalize;
+        }
+
+        /* ============================================
+           BOÎTE COMMENTAIRE - BORDURES ULTRA-VISIBLES
+           ============================================ */
+        .comment-box {
+            background-color: #FFF9E6;
+            border: 3px solid #FFD966; /* Bordure jaune visible */
+            border-left: 6px solid #FF9500;
+            border-radius: 28px; /* Ultra-arrondi */
+            padding: 26px;
+            margin: 30px 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .comment-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1D1D1F;
+            margin: 0 0 12px 0;
+        }
+
+        .comment-icon {
+            font-size: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .comment-text {
+            font-size: 15px;
+            color: #1D1D1F;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ============================================
+           SÉPARATEUR
+           ============================================ */
+        .divider-table {
+            width: 100%;
+            margin: 35px 0;
+        }
+
+        .divider-line {
+            height: 3px; /* Plus épais */
+            background-color: #D0D0D0; /* Plus visible */
+            border-radius: 3px;
+        }
+
+        /* ============================================
+           BOUTON CTA - ULTRA-VISIBLE
+           ============================================ */
+        .cta-table {
+            width: 100%;
+            margin: 30px 0;
+        }
+
+        .cta-button {
+            background-color: #0F5132;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 20px 48px;
+            border-radius: 28px; /* Ultra-arrondi */
+            font-size: 17px;
+            font-weight: 700;
+            display: inline-block;
+            text-align: center;
+            letter-spacing: 0.5px;
+            box-shadow: 0 12px 32px rgba(15, 81, 50, 0.3);
+            border: 3px solid #0F5132; /* Bordure visible */
+        }
+
+        .cta-button-cell {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer-section {
+            width: 100%;
+            background-color: #F8F8F8;
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 0 0 32px 32px; /* Arrondi seulement en bas */
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #6E6E73;
+            line-height: 1.6;
+            margin: 0 0 20px 0;
+        }
+
+        .footer-text strong {
+            color: #1D1D1F;
+            font-weight: 700;
+        }
+
+        .footer-links-table {
+            margin: 20px auto;
+        }
+
+        .footer-link {
+            color: #0F5132;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 16px;
+            display: inline-block;
+            border-radius: 18px;
+        }
+
+        .footer-link-cell {
+            padding: 5px 8px;
+        }
+
+        .footer-icon {
+            font-size: 16px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .footer-copyright {
+            font-size: 13px;
+            color: #0F5132;
+            font-weight: 600;
+            margin: 25px 0 0 0;
+        }
+
+        /* ============================================
+           RESPONSIVE (Mobile)
+           ============================================ */
+        @media only screen and (max-width: 600px) {
+            .email-outer-table {
+                padding: 20px 10px !important;
+            }
+
+            .header-table {
+                padding: 40px 20px !important;
+                border-radius: 28px 28px 0 0 !important;
+            }
+
+            .header-logo {
+                font-size: 52px !important;
+            }
+
+            .header-title {
+                font-size: 30px !important;
+            }
+
+            .header-subtitle {
+                font-size: 15px !important;
+            }
+
+            .hero-section {
+                padding: 40px 20px !important;
+            }
+
+            .status-badge {
+                width: 120px !important;
+                height: 120px !important;
+            }
+
+            .status-icon {
+                font-size: 56px !important;
+                line-height: 108px !important;
+            }
+
+            .hero-title {
+                font-size: 26px !important;
+            }
+
+            .hero-subtitle {
+                font-size: 16px !important;
+            }
+
+            .content-section {
+                padding: 30px 20px !important;
+            }
+
+            .info-card-table {
+                border-radius: 28px !important;
+            }
+
+            .info-cell {
+                padding: 20px 22px !important;
+            }
+
+            .info-value {
+                font-size: 16px !important;
+            }
+
+            .timeline-status {
+                font-size: 17px !important;
+            }
+
+            .comment-box {
+                padding: 22px !important;
+                border-radius: 24px !important;
+            }
+
+            .cta-button {
+                display: block !important;
+                padding: 18px 36px !important;
+                font-size: 16px !important;
+                border-radius: 24px !important;
+            }
+
+            .footer-section {
+                padding: 30px 20px !important;
+                border-radius: 0 0 28px 28px !important;
+            }
+
+            .footer-link {
+                display: block !important;
+                margin: 8px 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="body-wrapper">
+    
+    <!-- ============================================
+         WRAPPER PRINCIPAL - FOND BLANC
+         ============================================ -->
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-outer-table">
+        <tr>
+            <td align="center">
+                
+                <!-- Container principal - BORDURE ULTRA-VISIBLE -->
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="640" class="email-container" style="max-width: 640px; border-radius: 36px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); border: 4px solid #E0E0E0;">
+                    
+                    <!-- ============================================
+                         HEADER (Logo + Titre)
+                         ============================================ -->
+                    <tr>
+                        <td>
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="header-table">
+                                <tr>
+                                    <td class="header-logo-cell">
+                                        <div class="header-logo">🏥</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h1 class="header-title">ASSURANCE ARO</h1>
+                                        <p class="header-subtitle">Fiantohana ARO · Madagascar</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- ============================================
+                         SECTION HERO (Statut)
+                         ============================================ -->
+                    <tr>
+                        <td class="hero-section">
+                            <!-- Badge de statut - ULTRA-VISIBLE -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="status-badge-table">
+                                <tr>
+                                    <td class="status-badge status-{{STATUT_CLASS}}">
+                                        <span class="status-icon">{{STATUT_ICON}}</span>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Titre et numéro -->
+                            <h1 class="hero-title">{{TITRE}}</h1>
+                            <p class="hero-subtitle">📋 Déclaration N° {{NUMERO_DECLARATION}}</p>
+                        </td>
+                    </tr>
+
+                    <!-- ============================================
+                         SECTION CONTENU
+                         ============================================ -->
+                    <tr>
+                        <td class="content-section">
+                            
+                            <!-- CARTE INFORMATIONS - BORDURES ULTRA-VISIBLES -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="info-card-table">
+                                <!-- Ligne 1: Assuré -->
+                                <tr class="info-row">
+                                    <td class="info-cell">
+                                        <p class="info-label">
+                                            <span class="info-icon">👤</span>ASSURÉ
+                                        </p>
+                                        <p class="info-value">{{ASSURE_NOM}}</p>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Ligne 2: Type de sinistre (avec capitalize) -->
+                                <tr class="info-row">
+                                    <td class="info-cell">
+                                        <p class="info-label">
+                                            <span class="info-icon">🩺</span>TYPE DE SINISTRE
+                                        </p>
+                                        <p class="info-value">{{TYPE_SINISTRE}}</p>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Ligne 3: Date SEULEMENT (pas d'heure, pas de secondes) -->
+                                <tr class="info-row">
+                                    <td class="info-cell">
+                                        <p class="info-label">
+                                            <span class="info-icon">📅</span>DATE DE TRAITEMENT
+                                        </p>
+                                        <p class="info-value">{{DATE_TRAITEMENT}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- TIMELINE -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="timeline-table">
+                                <!-- Timeline Item 1: Ancien statut -->
+                                <tr class="timeline-row">
+                                    <td class="timeline-dot-cell">
+                                        <div class="timeline-dot timeline-dot-old">✓</div>
+                                    </td>
+                                    <td class="timeline-content-cell">
+                                        <p class="timeline-label">📊 STATUT PRÉCÉDENT</p>
+                                        <p class="timeline-status">{{ANCIEN_STATUT_LABEL}}</p>
+                                    </td>
+                                </tr>
+
+                                <!-- Timeline Item 2: Nouveau statut -->
+                                <tr class="timeline-row">
+                                    <td class="timeline-dot-cell">
+                                        <div class="timeline-dot timeline-dot-new">✓</div>
+                                    </td>
+                                    <td class="timeline-content-cell">
+                                        <p class="timeline-label">🔔 NOUVEAU STATUT</p>
+                                        <p class="timeline-status">{{NOUVEAU_STATUT_LABEL}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- COMMENTAIRE ADMIN (optionnel) -->
+                            {{COMMENTAIRE_SECTION}}
+
+                            <!-- SÉPARATEUR -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="divider-table">
+                                <tr>
+                                    <td class="divider-line"></td>
+                                </tr>
+                            </table>
+
+                            <!-- BOUTON CTA - ULTRA-VISIBLE -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="cta-table">
+                                <tr>
+                                    <td class="cta-button-cell">
+                                        <a href="{{PORTAL_URL}}" class="cta-button" style="color: #FFFFFF;">
+                                            🚀 Voir ma déclaration
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <!-- ============================================
+                         FOOTER
+                         ============================================ -->
+                    <tr>
+                        <td class="footer-section">
+                            
+                            <!-- Texte principal -->
+                            <p class="footer-text">
+                                <strong>Assurance ARO Madagascar</strong><br>
+                                <strong>Fiantohana ARO</strong><br><br>
+                                Cet email a été généré automatiquement par notre système.<br>
+                                Pour toute question ou assistance, merci de contacter notre service client.
+                            </p>
+
+                            <!-- Liens de contact -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="footer-links-table" align="center">
+                                <tr>
+                                    <td class="footer-link-cell">
+                                        <a href="tel:+261347960368" class="footer-link">
+                                            <span class="footer-icon">📞</span>+261 34 79 603 68
+                                        </a>
+                                    </td>
+                                    <td class="footer-link-cell">
+                                        <a href="mailto:contact@aro-assurance.mg" class="footer-link">
+                                            <span class="footer-icon">📧</span>Contact
+                                        </a>
+                                    </td>
+                                    <td class="footer-link-cell">
+                                        <a href="https://aro-assurance.mg" class="footer-link">
+                                            <span class="footer-icon">🌐</span>Site web
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Copyright -->
+                            <p class="footer-copyright">
+                                © 2025 Assurance ARO Madagascar · Fiantohana ARO<br>
+                                Tous droits réservés
+                            </p>
+
+                        </td>
+                    </tr>
+
+                </table>
+                
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

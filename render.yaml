@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: aro-backend
+    env: node
+    region: singapore
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        generateValue: true

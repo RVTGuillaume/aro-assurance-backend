@@ -1,0 +1,23 @@
+{
+  "watch": ["src/**/*"],
+  "ext": "js,json",
+  "ignore": [
+    "src/**/*.test.js",
+    "node_modules/**",
+    "uploads/**",
+    "logs/**"
+  ],
+  "exec": "node src/server.js",
+  "delay": 1000,
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "colours": true,
+  "verbose": true,
+  "events": {
+    "restart": "echo '🔄 Redémarrage du serveur...'",
+    "crash": "echo '💥 Crash détecté. Redémarrage...'"
+  },
+  "signal": "SIGHUP",
+  "timeout": 600000
+}

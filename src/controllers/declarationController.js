@@ -184,7 +184,7 @@ export const uploadFilesForDeclaration = async (req, res) => {
     const result = await pool.query(
       `SELECT id, type_sinistre, numero_declaration 
        FROM aro_assurance_db.declarations 
-       WHERE (id = $1 OR numero_declaration = $2) AND assure_id = $3`,
+       WHERE (id::text = $1 OR numero_declaration = $2) AND assure_id = $3`,
       [declarationId, declarationId, assureId]
     );
 
@@ -434,7 +434,7 @@ export const getDeclarationById = async (req, res) => {
         a.telephone
       FROM aro_assurance_db.declarations d
       INNER JOIN aro_assurance_db.assures a ON d.assure_id = a.id
-      WHERE (d.id = $1 OR d.numero_declaration = $2) AND d.assure_id = $3`,
+      WHERE (d.id::text = $1 OR d.numero_declaration = $2) AND d.assure_id = $3`,
       [id, id, assureId]
     );
 
@@ -607,7 +607,7 @@ export const deleteDeclaration = async (req, res) => {
 
     // ✅ POSTGRESQL
     const result = await pool.query(
-      'SELECT id FROM aro_assurance_db.declarations WHERE (id = $1 OR numero_declaration = $2) AND assure_id = $3',
+      'SELECT id FROM aro_assurance_db.declarations WHERE (id::text = $1 OR numero_declaration = $2) AND assure_id = $3',
       [id, id, assureId]
     );
 
@@ -660,7 +660,7 @@ export const updateDeclaration = async (req, res) => {
     // ✅ POSTGRESQL
     const existingResult = await client.query(
       `SELECT * FROM aro_assurance_db.declarations 
-       WHERE (id = $1 OR numero_declaration = $2) 
+       WHERE (id::text = $1 OR numero_declaration = $2) 
        AND assure_id = $3`,
       [id, id, assureId]
     );
@@ -766,7 +766,7 @@ export const getDeclarationFiles = async (req, res) => {
     console.log('📁 Récupération fichiers pour déclaration:', id);
 
     const declarationResult = await pool.query(
-      'SELECT id FROM aro_assurance_db.declarations WHERE (id = $1 OR numero_declaration = $2) AND assure_id = $3',
+      'SELECT id FROM aro_assurance_db.declarations WHERE (id::text = $1 OR numero_declaration = $2) AND assure_id = $3',
       [id, id, assureId]
     );
 

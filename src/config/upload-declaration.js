@@ -35,10 +35,10 @@ const storage = multer.diskStorage({
 // Validation des fichiers
 const fileFilter = (req, file, cb) => {
   // Accepter seulement les PDF
-  if (file.mimetype === 'application/pdf') {
+  if (['application/pdf','image/jpeg','image/png','image/webp','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'].includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error('Seuls les fichiers PDF sont acceptés'), false);
+    cb(new Error('Formats acceptés : PDF, images (JPG, PNG, WEBP), Word, Excel'), false);
   }
 };
 

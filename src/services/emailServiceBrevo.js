@@ -5,6 +5,12 @@ export async function sendEmailViaBrevo({ to, subject, htmlContent, textContent 
   const fromEmail = process.env.EMAIL_FROM;
   const fromName = process.env.EMAIL_FROM_NAME || 'ARO Assurance';
 
+  // ✅ Vérification de sécurité si l'email est vide ou invalide
+  if (!to || to.trim() === '' || !to.includes('@')) {
+    console.warn('⚠️ Brevo: Email destinataire vide ou invalide, envoi annulé.');
+    return { success: false, error: 'Email destinataire invalide' };
+  }
+
   if (!apiKey || !fromEmail) {
     console.error('❌ Brevo: BREVO_API_KEY ou EMAIL_FROM manquant');
     return { success: false, error: 'Configuration Brevo incomplète' };

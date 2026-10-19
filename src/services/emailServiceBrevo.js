@@ -5,8 +5,10 @@ export async function sendEmailViaBrevo({ to, subject, htmlContent, textContent 
   const fromEmail = process.env.EMAIL_FROM;
   const fromName = process.env.EMAIL_FROM_NAME || 'ARO Assurance';
 
-  // ✅ Vérification de sécurité si l'email est vide ou invalide
-  if (!to || to.trim() === '' || !to.includes('@')) {
+  // ✅ Sécurité anti-crash : on force la conversion en string
+  const emailDestinataire = String(to).trim();
+
+  if (!emailDestinataire || emailDestinataire === 'undefined' || !emailDestinataire.includes('@')) {
     console.warn('⚠️ Brevo: Email destinataire vide ou invalide, envoi annulé.');
     return { success: false, error: 'Email destinataire invalide' };
   }
@@ -26,7 +28,7 @@ export async function sendEmailViaBrevo({ to, subject, htmlContent, textContent 
       },
       body: JSON.stringify({
         sender: { name: fromName, email: fromEmail },
-        to: [{ email: to }],
+        to: [{ email: emailDestinataire }],
         subject: subject,
         htmlContent: htmlContent,
         textContent: textContent || subject,

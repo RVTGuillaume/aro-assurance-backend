@@ -13,12 +13,16 @@ const router = express.Router();
 router.get('/download/:type/:filename', (req, res) => {
   try {
     const { type, filename } = req.params;
-    const filePath = path.join(__dirname, '../../uploads', type, filename);
+    const uploadsRoot = path.resolve(__dirname, '../../uploads');
+    const filePath = path.resolve(uploadsRoot, type, filename);
+    if (!filePath.startsWith(uploadsRoot + path.sep)) {
+      return res.status(400).json({ success: false, message: 'Chemin invalide' });
+    }
 
     console.log(`📥 [STREAMING] Demande téléchargement: ${filename}`);
     console.log(`📂 Chemin: ${filePath}`);
 
-    if (!fs.existsSync(filePath)) {
+    if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
       console.log('❌ Fichier introuvable');
       return res.status(404).json({ success: false, message: 'Fichier introuvable' });
     }

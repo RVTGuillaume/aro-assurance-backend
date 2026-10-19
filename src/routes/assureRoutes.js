@@ -14,6 +14,7 @@ const __dirname = path.dirname(__filename);
 const router = express.Router();
 
 import * as assureController from '../controllers/assureController.js';
+import { authenticate, requireAdmin } from '../middlewares/authMiddleware.js';
 
 // Configuration Multer
 const storage = multer.diskStorage({
@@ -57,6 +58,9 @@ router.get('/test', (req, res) => {
 });
 
 // STATS
+// Toutes les routes ci-dessous sont reservees aux administrateurs connectes
+router.use(authenticate, requireAdmin);
+
 router.get('/stats', (req, res, next) => {
   console.log('📊 GET /stats');
   assureController.getStats(req, res, next);

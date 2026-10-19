@@ -6,7 +6,7 @@
  */
 
 import express from 'express';
-import { authenticate } from '../middlewares/authMiddleware.js';
+import { authenticate, requireAdmin } from '../middlewares/authMiddleware.js';
 import { checkRole } from '../middlewares/roleMiddleware.js'; // ✅ CORRECTION
 import {
   validateCreateAssure,
@@ -23,6 +23,7 @@ const router = express.Router();
 
 // Authentification requise pour TOUTES les routes admin
 router.use(authenticate);
+router.use(requireAdmin);
 
 /**
  * ========================================

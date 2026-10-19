@@ -176,3 +176,4 @@ ALTER TABLE assures ADD COLUMN IF NOT EXISTS date_naissance DATE;
 ALTER TABLE assures ADD COLUMN IF NOT EXISTS date_debut_contrat DATE;
 ALTER TABLE assures ADD COLUMN IF NOT EXISTS date_fin_contrat DATE;
 ALTER TABLE assures ADD COLUMN IF NOT EXISTS parente_avec_titulaire VARCHAR(100);
+ALTER TABLE audit_logs ADD COLUMN IF NOT EXISTS message_erreur TEXT;

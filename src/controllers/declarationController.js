@@ -130,9 +130,18 @@ export const createDeclarationOnly = async (req, res) => {
 
     // ✅ ENVOYER L'EMAIL EN ARRIÈRE-PLAN (NON-BLOQUANT)
     if (sendEmail) {
-      sendDeclarationEmail(assureId, numeroDeclaration, type_sinistre, personne_soignee_nom)
-        .then(() => console.log('📧 Email envoyé avec succès en background'))
-        .catch(err => console.error('❌ Erreur envoi email background:', err.message));
+      const emailDestinataire = req.user?.email;
+      if (emailDestinataire) {
+        sendDeclarationEmail(
+          emailDestinataire,
+          `Confirmation de votre déclaration ${numeroDeclaration}`,
+          `<p>Bonjour ${req.user?.nom_complet || 'Utilisateur'},</p><p>Votre déclaration <b>${numeroDeclaration}</b> de type <b>${type_sinistre}</b> a bien été enregistrée.</p><p>Nous reviendrons vers vous rapidement.</p>`
+        )
+          .then((r) => { if (r && r.success === false) console.error('❌ Erreur email déclaration:', r.error); else console.log('📧 Email de déclaration envoyé avec succès'); })
+          .catch(err => console.error('❌ Erreur envoi email background:', err.message));
+      } else {
+        console.warn('⚠️ Aucune adresse email pour l\'assuré, envoi annulé.');
+      }
     }
 
   } catch (error) {
@@ -718,16 +727,18 @@ export const updateDeclaration = async (req, res) => {
 
     // Email en arrière-plan
     if (sendEmail) {
-      sendModificationEmail({
-        declarationNumber: declaration.numero_declaration,
-        userName: req.user?.nom_complet || 'Utilisateur',
-        userEmail: req.user?.email || '',
-        modificationType: formData.type_sinistre,
-        modificationDate: new Date().toLocaleDateString('fr-FR'),
-        ...formData
-      })
-      .then(() => console.log('📧 Email de modification envoyé'))
-      .catch(err => console.error('❌ Erreur email:', err.message));
+      const emailDestinataire = req.user?.email || declaration.email;
+      if (emailDestinataire) {
+        sendModificationEmail(
+          emailDestinataire,
+          `Modification de votre déclaration ${declaration.numero_declaration}`,
+          `<p>Bonjour ${req.user?.nom_complet || 'Utilisateur'},</p><p>Votre déclaration <b>${declaration.numero_declaration}</b> a bien été modifiée.</p>`
+        )
+          .then((r) => { if (r && r.success === false) console.error('❌ Erreur email modification:', r.error); else console.log('📧 Email de modification envoyé'); })
+          .catch(err => console.error('❌ Erreur email:', err.message));
+      } else {
+        console.warn('⚠️ Aucune adresse email pour l\'assuré, envoi annulé.');
+      }
     }
 
   } catch (error) {

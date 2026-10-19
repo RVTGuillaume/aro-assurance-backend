@@ -171,3 +171,7 @@ CREATE INDEX IF NOT EXISTS idx_pieces_declaration ON pieces_jointes(declaration_
 CREATE INDEX IF NOT EXISTS idx_historique_declaration ON historique_declarations(declaration_id);
 CREATE INDEX IF NOT EXISTS idx_notifications_dest ON notifications(destinataire_type, destinataire_id);
 CREATE INDEX IF NOT EXISTS idx_otp_admin ON otp_reinitialisations(admin_id);
+ALTER TABLE assures ADD COLUMN IF NOT EXISTS adresse TEXT;
+ALTER TABLE assures ADD COLUMN IF NOT EXISTS date_naissance DATE;
+ALTER TABLE assures ADD COLUMN IF NOT EXISTS date_debut_contrat DATE;
+ALTER TABLE assures ADD COLUMN IF NOT EXISTS date_fin_contrat DATE;

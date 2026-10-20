@@ -1,3 +1,4 @@
+import { emailConfirmationAssure, emailNouvelleDeclarationAdmin } from '../utils/emailLayout.js';
 /**
  * Contrôleur Déclarations - PostgreSQL Version
  * Assurance ARO Madagascar
@@ -37,7 +38,7 @@ export const createDeclarationOnly = async (req, res) => {
 
     console.log('⚡ Création déclaration pour assuré:', assureId);
 
-    const sendEmail = req.body.sendEmail === true || req.body.sendEmail === 'true';
+    const sendEmail = req.body.sendEmail !== false && req.body.sendEmail !== 'false';
     const saveToDb = req.body.saveToDb !== false && req.body.saveToDb !== 'false';
 
     console.log('📨 Options:', { sendEmail, saveToDb });
@@ -129,13 +130,26 @@ export const createDeclarationOnly = async (req, res) => {
     });
 
     // ✅ ENVOYER L'EMAIL EN ARRIÈRE-PLAN (NON-BLOQUANT)
-    if (sendEmail) {
-      const emailDestinataire = req.user?.email;
+    // Alerte administrateurs : nouvelle declaration
+try {
+  const admins = await pool.query("SELECT id, email FROM aro_assurance_db.administrateurs WHERE statut = 'actif'");
+  for (const adm of admins.rows) {
+    await pool.query(
+      `INSERT INTO aro_assurance_db.notifications (destinataire_type, destinataire_id, titre, message, type_notification, est_lu, date_creation) VALUES ($1, $2, $3, $4, $5, $6, NOW())`,
+      ['admin', adm.id, 'Nouvelle declaration', `Nouvelle declaration ${numeroDeclaration} (${type_sinistre}) deposee par ${req.user?.nom_complet || 'un assure'}.`, 'info', false]
+    );
+    if (adm.email) {
+      sendDeclarationEmail(adm.email, `Nouvelle d\u00e9claration ${numeroDeclaration}`, emailNouvelleDeclarationAdmin({ numero: numeroDeclaration, type: type_sinistre, assure: req.user?.nom_complet }))
+        .catch(err => console.error('Erreur email admin:', err.message));
+    }
+  }
+} catch (err) { console.error('Erreur alerte admin:', err.message); }
+if (sendEmail) {
+      const emailDestinataire = req.user?.email || (await pool.query('SELECT email FROM aro_assurance_db.assures WHERE id = $1', [req.user?.id])).rows[0]?.email;
       if (emailDestinataire) {
         sendDeclarationEmail(
           emailDestinataire,
-          `Confirmation de votre déclaration ${numeroDeclaration}`,
-          `<p>Bonjour ${req.user?.nom_complet || 'Utilisateur'},</p><p>Votre déclaration <b>${numeroDeclaration}</b> de type <b>${type_sinistre}</b> a bien été enregistrée.</p><p>Nous reviendrons vers vous rapidement.</p>`
+          `Confirmation de votre d\u00e9claration ${numeroDeclaration}`, emailConfirmationAssure({ nom: req.user?.nom_complet, numero: numeroDeclaration, type: type_sinistre })
         )
           .then((r) => { if (r && r.success === false) console.error('❌ Erreur email déclaration:', r.error); else console.log('📧 Email de déclaration envoyé avec succès'); })
           .catch(err => console.error('❌ Erreur envoi email background:', err.message));

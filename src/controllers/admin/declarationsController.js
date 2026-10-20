@@ -258,7 +258,7 @@ class AdminDeclarationsController {
       console.log('✅ Statut mis à jour en base de données\n');
 
       // Envoyer l'email si demandé
-      if (notify_email) {
+      if (notify_email !== false || ['validee', 'refusee', 'complements_requis'].includes(statut)) {
         console.log('📧 ENVOI EMAIL DEMANDÉ...');
 
         if (!declaration.assure_email) {

@@ -350,12 +350,10 @@ class AdminController {
           console.warn('⚠️  IMPOSSIBLE : Pas d\'email pour cet assuré');
         } else {
           try {
+            // ✅ CORRECTION ICI : On envoie les 5 paramètres séparés
             const emailResult = await envoyerNotificationStatut(
-              {
-                ...declaration,
-                numero_declaration: declaration.numero_declaration || `DEC-${id}`,
-                type_sinistre: declaration.type_sinistre || 'Non spécifié'
-              },
+              declaration.assure_email,
+              declaration.numero_declaration || `DEC-${id}`,
               ancienStatut,
               statut,
               commentaire

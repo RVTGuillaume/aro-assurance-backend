@@ -4,7 +4,7 @@
  */
 
 import pool from '../config/database.js';
-import emailService from '../services/email.service.js';
+import { envoyerNotificationStatut } from '../services/emailService.js';
 
 class AdminController {
   /**
@@ -350,7 +350,7 @@ class AdminController {
           console.warn('⚠️  IMPOSSIBLE : Pas d\'email pour cet assuré');
         } else {
           try {
-            const emailResult = await emailService.envoyerNotificationStatut(
+            const emailResult = await envoyerNotificationStatut(
               {
                 ...declaration,
                 numero_declaration: declaration.numero_declaration || `DEC-${id}`,
